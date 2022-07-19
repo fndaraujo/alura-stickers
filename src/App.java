@@ -6,13 +6,9 @@ import java.net.http.HttpResponse.BodyHandlers;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        String apiUrl = "https://imdb-api.com/en/API/Top250Movies/";
-        String apiKey = "k_12345678";
-        String apiAccess = apiUrl + apiKey;
-
         HttpClient httpClient = HttpClient.newHttpClient();
 
-        HttpRequest httpReq = HttpRequest.newBuilder(URI.create(apiAccess))
+        HttpRequest httpReq = HttpRequest.newBuilder(URI.create(ApiAccess.getApiAccess()))
             .GET()
             .build();
 
