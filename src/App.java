@@ -14,7 +14,7 @@ public class App {
     public static void main(String[] args) throws Exception {
         HttpClient httpClient = HttpClient.newHttpClient();
 
-        HttpRequest httpReq = HttpRequest.newBuilder(URI.create(ApiAccess.getApiAccess()))
+        HttpRequest httpReq = HttpRequest.newBuilder(URI.create(Api.apiConnection()))
             .GET()
             .build();
 
