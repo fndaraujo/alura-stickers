@@ -1,4 +1,5 @@
 import java.net.URI;
+import java.net.URL;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -6,6 +7,8 @@ import java.net.http.HttpResponse.BodyHandlers;
 
 import java.util.List;
 import java.util.Map;
+
+import java.io.InputStream;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -24,21 +27,12 @@ public class App {
 
         List<Map<String, String>> moviesList = jsonParser.parse(httpRes.body());
 
+        StickerGen sticker = new StickerGen();
         for (Map<String, String> movie : moviesList) {
-            String ratingStars = "";
-            for (int i = 0; i < (int)Double.parseDouble(movie.get("imDbRating")); ++i) {
-                ratingStars+= "*";
-            }
-            System.out.println(
-                movie.get("title")
-                + " ["
-                + movie.get("image")
-                + "] "
-                + movie.get("imDbRating")
-                + " "
-                + ratingStars
-            );
-            ratingStars = "";
+            InputStream inputStream = new URL(movie.get("image")).openStream();
+            sticker.create(inputStream, movie.get("title") + ".png");
+
+            System.out.println(movie.get("title"));
         }
     }
 }

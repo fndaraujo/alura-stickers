@@ -1,4 +1,6 @@
 *.class
+*.jpg
+*.png
 
 bin/
 lib/
