@@ -30,7 +30,7 @@ public class App {
         StickerGen sticker = new StickerGen();
         for (Map<String, String> movie : moviesList) {
             InputStream inputStream = new URL(movie.get("image").replaceAll("(@+)(.*).jpg$", "$1.jpg")).openStream();
-            sticker.create(inputStream, movie.get("title") + ".png");
+            sticker.create(inputStream, "output/" + movie.get("title") + ".png");
 
             System.out.println(movie.get("title"));
         }
