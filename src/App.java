@@ -8,8 +8,8 @@ import java.io.InputStream;
 public class App {
     public static void main(String[] args) throws Exception {
         Api api = new Api();
-        //ContentsImdb apiContents = new ContentsImdb();
-        ContentsNasa apiContents = new ContentsNasa();
+        //ContentsApi apiContents = new ContentsImdb();
+        ContentsApi apiContents = new ContentsNasa();
         List<Content> contents = apiContents.getContents(api.apiContent());
 
         StickerGen sticker = new StickerGen();

@@ -2,9 +2,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.ArrayList;
 
-public class ContentsImdb {
+public class ContentsImdb implements ContentsApi {
     public List<Content> getContents(String json) {
-        // TODO: Write code.
         JsonParser jsonParser = new JsonParser();
         List<Map<String, String>> apiContents = jsonParser.parse(json);
         List<Content> contents = new ArrayList<>();
