@@ -25,14 +25,14 @@ public class App {
 
         JsonParser jsonParser = new JsonParser();
 
-        List<Map<String, String>> moviesList = jsonParser.parse(httpRes.body());
+        List<Map<String, String>> apiContents = jsonParser.parse(httpRes.body());
 
         StickerGen sticker = new StickerGen();
-        for (Map<String, String> movie : moviesList) {
-            InputStream inputStream = new URL(movie.get("image").replaceAll("(@+)(.*).jpg$", "$1.jpg")).openStream();
-            sticker.create(inputStream, "output/" + movie.get("title") + ".png");
+        for (Map<String, String> content : apiContents) {
+            InputStream inputStream = new URL(content.get("url").replaceAll("(@+)(.*).jpg$", "$1.jpg")).openStream();
+            sticker.create(inputStream, "output/" + content.get("title") + ".png");
 
-            System.out.println(movie.get("title"));
+            System.out.println(content.get("title"));
         }
     }
 }
