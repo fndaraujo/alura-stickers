@@ -8,15 +8,16 @@ import java.io.InputStream;
 public class App {
     public static void main(String[] args) throws Exception {
         Api api = new Api();
-        JsonParser jsonParser = new JsonParser();
-        List<Map<String, String>> apiContents = jsonParser.parse(api.apiContent());
+        //ContentsImdb apiContents = new ContentsImdb();
+        ContentsNasa apiContents = new ContentsNasa();
+        List<Content> contents = apiContents.getContents(api.apiContent());
 
         StickerGen sticker = new StickerGen();
-        for (Map<String, String> content : apiContents) {
-            InputStream inputStream = new URL(content.get("url").replaceAll("(@+)(.*).jpg$", "$1.jpg")).openStream();
-            sticker.create(inputStream, "output/" + content.get("title") + ".png");
+        for (Content content : contents) {
+            InputStream inputStream = new URL(content.getUrlImage()).openStream();
+            sticker.create(inputStream, "output/" + content.getTitle() + ".png");
 
-            System.out.println(content.get("title"));
+            System.out.println(content.getTitle());
         }
     }
 }
